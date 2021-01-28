@@ -1,7 +1,6 @@
 package chess;
 
 import board.Board;
-import board.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
@@ -29,9 +28,14 @@ public class ChessMatch
 		return pieces;
 	}
 	
+	private void insertPiece(ChessPiece piece, ChessPosition cposition)
+	{
+		board.placePiece(piece, cposition.toPosition());
+	}
+	
 	private void initialSetup()
 	{
-		board.placePiece(new Rook(board, Color.BLACK), new Position(0,0));
-		board.placePiece(new King(board, Color.BLACK), new Position(0,4));
+		insertPiece(new Rook(board, Color.BLACK), new ChessPosition('a',8));
+		insertPiece(new King(board, Color.BLACK), new ChessPosition('d',8));
 	}
 }
