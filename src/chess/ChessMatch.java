@@ -35,7 +35,7 @@ public class ChessMatch
 	
 	private void initialSetup()
 	{
-		insertPiece(new Rook(board, Color.BLACK), new ChessPosition('a',8));
+		insertPiece(new Rook(board, Color.WHITE), new ChessPosition('a',8));
 		insertPiece(new King(board, Color.BLACK), new ChessPosition('d',8));
 	}
 }
