@@ -35,7 +35,29 @@ public class ChessMatch
 	
 	private void initialSetup()
 	{
-		insertPiece(new Rook(board, Color.WHITE), new ChessPosition('a',8));
-		insertPiece(new King(board, Color.BLACK), new ChessPosition('d',8));
+		insertPiece(new Rook(board, Color.BLACK), new ChessPosition('a',3));
+		insertPiece(new Rook(board, Color.WHITE), new ChessPosition('a',1));
+		insertPiece(new King(board, Color.BLACK), new ChessPosition('a',8));
+	}
+	
+	public ChessPiece perfomChessMove(ChessPosition source, ChessPosition target)
+	{
+		if(!board.thereIsAPiece(source.toPosition()))
+		{
+			throw new ChessException("Nao ha peca para mover!");
+		}
+		if(!board.piece(source.toPosition()).isThereAnyPossibleMove())
+		{
+			throw new ChessException("Peca presa!");
+		}
+		if(!board.piece(source.toPosition()).possibleMove(target.toPosition()))
+		{
+			throw new ChessException("Nao eh possivel mover para a casa escolhida!");
+		}
+		
+		ChessPiece pieceSource = (ChessPiece) board.removePiece(source.toPosition());
+		ChessPiece pieceTarget = (ChessPiece) board.removePiece(target.toPosition());
+		board.placePiece(pieceSource, target.toPosition());
+		return pieceTarget;
 	}
 }

@@ -18,7 +18,7 @@ public class Board
 		Position position = new Position(row,column);
 		if(!positionExists(position))
 		{
-			throw new BoardException("Posição Inválida!");
+			throw new BoardException("Posicao Invalida!");
 		}
 		return pieces[row][column];
 	}
@@ -26,7 +26,7 @@ public class Board
 	{
 		if(!positionExists(position))
 		{
-			throw new BoardException("Posição Inválida!");
+			throw new BoardException("Posicao Invalida!");
 		}
 		return pieces[position.getRow()][position.getColumn()];
 	}
@@ -35,10 +35,21 @@ public class Board
 	{
 		if(thereIsAPiece(position))
 		{
-			throw new BoardException("Já existe uma peça!");
+			throw new BoardException("Ja existe uma peca!");
 		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
+	}
+	
+	public Piece removePiece(Position position)
+	{
+		Piece piece = piece(position);
+		if(piece!=null)
+		{
+			piece.position = null;
+		}
+		pieces[position.getRow()][position.getColumn()] = null;
+		return piece;
 	}
 	
 	public boolean positionExists(Position position)
@@ -49,7 +60,7 @@ public class Board
 	{
 		if(!positionExists(position))
 		{
-			throw new BoardException("Posição Inválida!");
+			throw new BoardException("Posicao Invalida!");
 		}
 		return pieces[position.getRow()][position.getColumn()] != null;
 	}

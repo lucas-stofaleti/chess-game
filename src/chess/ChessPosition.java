@@ -11,7 +11,7 @@ public class ChessPosition
 	{
 		if(row>8 || row<1 || column > 'h' || column<'a')
 		{
-			throw new ChessException("Posição Inválida!");
+			throw new ChessException("Posicao Invalida!");
 		}
 		this.column = column;
 		this.row = row;

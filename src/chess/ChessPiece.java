@@ -3,10 +3,9 @@ package chess;
 import board.Board;
 import board.Piece;
 
-public class ChessPiece extends Piece
+public abstract class ChessPiece extends Piece
 {
 	private Color color;
-	private int moveCount;
 	
 	public ChessPiece(Board board, Color color) 
 	{
@@ -18,4 +17,6 @@ public class ChessPiece extends Piece
 	{
 		return color;
 	}
+
+	public abstract boolean[][] possibleMoves();
 }
