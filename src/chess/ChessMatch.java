@@ -1,6 +1,8 @@
 package chess;
 
+import application.UI;
 import board.Board;
+import board.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
@@ -35,9 +37,11 @@ public class ChessMatch
 	
 	private void initialSetup()
 	{
-		insertPiece(new Rook(board, Color.BLACK), new ChessPosition('a',3));
+		insertPiece(new Rook(board, Color.BLACK), new ChessPosition('a',7));
 		insertPiece(new Rook(board, Color.WHITE), new ChessPosition('a',1));
 		insertPiece(new King(board, Color.BLACK), new ChessPosition('a',8));
+		insertPiece(new King(board, Color.BLACK), new ChessPosition('b',7));
+		insertPiece(new King(board, Color.BLACK), new ChessPosition('a',6));
 	}
 	
 	public ChessPiece perfomChessMove(ChessPosition source, ChessPosition target)
@@ -59,5 +63,27 @@ public class ChessMatch
 		ChessPiece pieceTarget = (ChessPiece) board.removePiece(target.toPosition());
 		board.placePiece(pieceSource, target.toPosition());
 		return pieceTarget;
+	}
+	
+	public boolean[][] possibleMovesColor(ChessPosition source)
+	{
+		if(!board.thereIsAPiece(source.toPosition()))
+		{
+			UI.printBoard(getPieces());
+			throw new ChessException("\nNao ha peca para mover!");
+		}
+		boolean[][] colorBoard = new boolean[8][8];
+		Position position = source.toPosition();
+		boolean[][] mat = board.piece(position).possibleMoves();
+		
+		for(int i=0; i<8; i++)
+		{
+			for(int j=0; j<8; j++)
+			{
+				colorBoard[i][j] = mat[i][j];
+			}
+		}
+		
+		return colorBoard;
 	}
 }
